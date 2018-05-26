@@ -1,6 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 // const CleanWebpackPlugin =  require('clean-webpack-plugin');
 
 
@@ -18,7 +19,8 @@ module.exports = {
      devtool:'source-map',
     //devtool: 'nosources-source-map',
     devServer: {
-        contentBase: './dist'
+        contentBase: './dist',
+        index:'./mobile.html'
     },
     plugins: [
         new CleanWebpackPlugin(['dist']),
@@ -30,12 +32,19 @@ module.exports = {
             filename:'mobile.html',
             hash:true
         }),
-        new HtmlWebpackPlugin({
-            title:'rd平台',
-            template: 'mobile.html', // 源模板文件
-            filename: './index.html', // 输出文件【注意：这里的根路径是module.exports.output.path】
-            showErrors: true,
-            inject: false
+        // new HtmlWebpackPlugin({
+        //     title:'rd平台',
+        //     template: 'mobile.html', // 源模板文件
+        //     filename: './index.html', // 输出文件【注意：这里的根路径是module.exports.output.path】
+        //     showErrors: true,
+        //     inject: false
+        // })
+        new CopyWebpackPlugin([{
+            from: 'resource',
+            to: 'resource'
+        }], {
+            ignore: [],
+            copyUnmodified: true
         })
     ],
     output: {
