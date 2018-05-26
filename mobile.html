@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+   
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title></title>
+    
+    <script>
+        function setRemFontSize(baseSize, baseWidth) {
+            var baseSize = baseSize || 50,
+                baseWidth = baseWidth || 375,
+                clientWidth = document.documentElement.clientWidth;
+            document.getElementsByTagName('html')[0].style.fontSize = window.fontSize= clientWidth * baseSize / baseWidth + 'px'
+        }
+        setRemFontSize();
+        window.addEventListener("resize", function () {
+            setRemFontSize();
+        });
+    </script>
+</head>
+
+<body>
+    <p>this is  demo page</p>
+<ul>
+        <% for ( var key in htmlWebpackPlugin ){ %>
+            <% if ( key == 'files' ) { %>
+                <h3>files</h3>
+                <% for( var f in htmlWebpackPlugin[key] ){ %>
+                    <li> <%= f %>, <%= htmlWebpackPlugin[key][f] %> </li>
+                    <% if ( f == 'chunks') { %>
+                        <p><%= JSON.stringify( htmlWebpackPlugin[key][f] ) %></p>
+                    <% } %>
+                <% } %>
+            <% } else { %>
+                <h3>options</h3>
+                <% for( var f in htmlWebpackPlugin[key] ){ %>
+                    <li> <%= f %>, <%= htmlWebpackPlugin[key][f] %> </li>
+                <% } %>
+            <% } %>
+        <% } %>
+    </ul>
+</body>
+
+<!-- <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script> -->
+
+<!-- <script type="text/javascript" src="<%=htmlWebpackPlugin.files.chunks.mobile.entry %>"></script> -->
+
+
+
+</html>
